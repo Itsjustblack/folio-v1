@@ -1,0 +1,36 @@
+"use client";
+
+import type { ComponentType, SVGProps } from "react";
+
+export interface IExperience {
+	logo: ComponentType<SVGProps<SVGSVGElement>>;
+	role: string;
+	company: string;
+	location: string;
+	period: string;
+}
+
+export default function Experience({
+	logo: Logo,
+	role,
+	company,
+	location,
+	period,
+}: IExperience) {
+	return (
+		<li className="flex gap-x-5 items-center">
+			<Logo
+				width={50}
+				height={50}
+			/>
+			<div className="font-geist">
+				<p className="text-lg space-y-1.25 text-foreground -tracking-[0.18px]">
+					{role} <span className="font-semibold">• {company}</span>
+				</p>
+				<p className="text-foreground text-base -tracking-[0.15px]">
+					{location}, <span className="text-foreground-muted">{period}</span>
+				</p>
+			</div>
+		</li>
+	);
+}
