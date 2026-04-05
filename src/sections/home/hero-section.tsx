@@ -86,7 +86,7 @@ export default function HeroSection() {
 						transition={{ type: "spring", stiffness: 300, damping: 25 }}
 						className="text-5xl font-normal font-primary text-center text-foreground tracking-[-0.48px] mt-8.75"
 					>
-						Hey, I'm Jason A 0 → 1 Software <br /> Engineer with 4 years of
+						Hey, I&apos;m Jason A 0 → 1 Software <br /> Engineer with 4 years of
 						experience
 					</motion.h1>
 

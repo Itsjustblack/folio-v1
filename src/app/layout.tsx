@@ -1,14 +1,15 @@
-import type { Metadata } from "next";
-import "./globals.css";
-import "dialkit/styles.css";
-import Providers from "../providers/providers";
-import NavBar from "../components/navbar";
-import Footer from "../components/layout/footer";
-import VinylMusic from "../components/vinyl-music";
-import { Geist } from "next/font/google";
 import { cn } from "@/lib/utils";
+import TanstackQueryProvider from "@/providers/tanstack-query-provider";
+import ThemeProvider from "@/providers/theme-provider";
+import { DialRoot } from "dialkit";
+import type { Metadata } from "next";
+import { Geist } from "next/font/google";
+import Footer from "../components/layout/footer";
+import NavBar from "../components/navbar";
+import VinylMusic from "../components/vinyl-music";
+import "./globals.css";
 
-const geist = Geist({subsets:['latin'],variable:'--font-sans'});
+const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
 
 export const metadata: Metadata = {
 	title: "Portfolio",
@@ -21,16 +22,22 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang="en" className={cn("font-sans", geist.variable)}>
+		<html
+			lang="en"
+			className={cn("font-sans", geist.variable)}
+		>
 			<body>
-				<Providers>
-					<main className="min-h-dvh mt-7.5">
-						<NavBar />
-						{children}
-						<Footer />
-						<VinylMusic />
-					</main>
-				</Providers>
+				<main className="min-h-dvh mt-7.5">
+					<TanstackQueryProvider>
+						<ThemeProvider>
+							<NavBar />
+							{children}
+							<Footer />
+							{/* <VinylMusic /> */}
+							<DialRoot />
+						</ThemeProvider>
+					</TanstackQueryProvider>
+				</main>
 			</body>
 		</html>
 	);

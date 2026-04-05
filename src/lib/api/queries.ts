@@ -1,34 +1,54 @@
-import { SPOTIFY_TOKEN_URL } from "../constants";
-import { apiFetch } from "./client";
-import type { SpotifyPlaylist, SpotifyToken } from "./types";
+import { SpotifyAuthError } from "../spotify";
+import type {
+	SpotifyPlaylistsResponse,
+	SpotifyPlaylistTracksResponse,
+} from "./types";
 
-const CLIENT_ID = process.env.NEXT_PUBLIC_VITE_SPOTIFY_CLIENT_ID;
-const CLIENT_SECRET = process.env.NEXT_PUBLIC_VITE_SPOTIFY_CLIENT_SECRET;
-
-export async function getSpotifyToken(): Promise<SpotifyToken> {
-	const credentials = btoa(`${CLIENT_ID}:${CLIENT_SECRET}`);
-
-	const res = await fetch(SPOTIFY_TOKEN_URL, {
-		method: "POST",
-		headers: {
-			Authorization: `Basic ${credentials}`,
-			"Content-Type": "application/x-www-form-urlencoded",
-		},
-		body: "grant_type=client_credentials",
-	});
-
-	if (!res.ok) {
-		throw new Error(
-			`Failed to get Spotify token: ${res.status} ${res.statusText}`,
-		);
-	}
-
-	return res.json() as Promise<SpotifyToken>;
+export async function getSpotifyAuthStatus(): Promise<{
+	authenticated: boolean;
+}> {
+	const res = await fetch("/api/spotify/auth-status");
+	return res.json();
 }
 
-export async function getPlaylist(
+export async function spotifyLogout(): Promise<void> {
+	await fetch("/api/spotify/logout", { method: "POST" });
+}
+
+export async function getUserPlaylists(queryParams: {
+	limit: number;
+	offset: number;
+}) {
+	const res = await fetch(
+		`/api/spotify/me/playlists?limit=${queryParams.limit}&offset=${queryParams.offset}`,
+	);
+
+	if (!res.ok) {
+		const data = await res.json();
+		if (res.status === 401 && data.error === "not_authenticated") {
+			throw new SpotifyAuthError();
+		}
+		throw new Error(`Spotify API error: ${res.status} ${res.statusText}`);
+	}
+
+	return res.json() as Promise<SpotifyPlaylistsResponse>;
+}
+
+export async function getPlaylistTracks(
 	playlistId: string,
-): Promise<SpotifyPlaylist> {
-	const { access_token } = await getSpotifyToken();
-	return apiFetch<SpotifyPlaylist>(`/playlists/${playlistId}`, access_token);
+	queryParams: { limit: number; offset: number },
+) {
+	const res = await fetch(
+		`/api/spotify/playlists/${playlistId}/items?limit=${queryParams.limit}&offset=${queryParams.offset}`,
+	);
+
+	if (!res.ok) {
+		const data = await res.json();
+		if (res.status === 401 && data.error === "not_authenticated") {
+			throw new SpotifyAuthError();
+		}
+		throw new Error(`Spotify API error: ${res.status} ${res.statusText}`);
+	}
+
+	return res.json() as Promise<SpotifyPlaylistTracksResponse>;
 }

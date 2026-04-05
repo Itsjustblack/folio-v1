@@ -8,10 +8,12 @@ export default function ThemeProvider({
 }: {
 	children: React.ReactNode;
 }) {
-	const [theme, setTheme] = useState<Theme>(() => {
-		if (typeof window === "undefined") return "light";
-		return (localStorage.getItem("theme") as Theme) ?? "light";
-	});
+	const [theme, setTheme] = useState<Theme>("light");
+
+	useEffect(() => {
+		const stored = localStorage.getItem("theme") as Theme | null;
+		if (stored) setTheme(stored);
+	}, []);
 
 	useEffect(() => {
 		const root = document.documentElement;

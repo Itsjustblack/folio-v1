@@ -28,7 +28,7 @@ export default function Experience({
 					{role} <span className="font-semibold">• {company}</span>
 				</p>
 				<p className="text-foreground text-base -tracking-[0.15px]">
-					{location}, <span className="text-foreground-muted">{period}</span>
+					{location}, <span className="text-muted-foreground">{period}</span>
 				</p>
 			</div>
 		</li>

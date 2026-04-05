@@ -71,7 +71,7 @@ function ProjectPreview({
 				<span className="inline-block text-foreground font-semibold -tracking-[0.2px] text-xl">
 					{title}
 				</span>
-				<p className="mt-1.25 text-foreground-muted -tracking-[-0.15px] text-[15px]">
+				<p className="mt-1.25 text-muted-foreground -tracking-[-0.15px] text-[15px]">
 					{description}
 				</p>
 			</div>

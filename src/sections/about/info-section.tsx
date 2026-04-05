@@ -11,12 +11,12 @@ export default function InfoSection() {
 				<h1 className="font-primary text-foreground text-5xl -tracking-[0.48px]">
 					About Me
 				</h1>
-				<p className="text-lg leading-7.5 -tracking-[0.18px] text-foreground-muted mt-7.5">
+				<p className="text-lg leading-7.5 -tracking-[0.18px] text-muted-foreground mt-7.5">
 					I’ve been working professionally in product design for six years,
 					focusing on 0→1 product development, complex financial flows, and
 					highly interactive interfaces. <br /> <br />
 				</p>
-				<p className="text-lg leading-7.5 -tracking-[0.18px] text-foreground-muted">
+				<p className="text-lg leading-7.5 -tracking-[0.18px] text-muted-foreground">
 					My approach is rooted in understanding user behavior, aligning design
 					decisions with business goals, and crafting digital products that are
 					visually strong, intuitive, and scalable.
@@ -29,6 +29,8 @@ export default function InfoSection() {
 						src="/shelf.png"
 						alt="a shelf"
 						fill
+						loading="eager"
+						sizes="400px"
 						className="object-cover z-2"
 					/>
 				</div>

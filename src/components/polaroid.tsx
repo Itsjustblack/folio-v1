@@ -35,7 +35,7 @@ export default function Polaroid({
 					alt={alt}
 					fill
 					loading="eager"
-					fetchPriority="high"
+					priority
 					className="object-cover object-top"
 				/>
 			</div>

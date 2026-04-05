@@ -18,6 +18,8 @@ export default function AnalogClock({
 	const NUMBER_INSET = SIZE * 0.18;
 	const time = useCurrentTime();
 
+	if (!time) return null;
+
 	return (
 		<div className={cn("space-y-2.5 size-fit", className)}>
 			<div
@@ -44,7 +46,7 @@ export default function AnalogClock({
 								y1={y1}
 								x2={x2}
 								y2={y2}
-								stroke="var(--color-foreground-muted)"
+								stroke="var(--color-muted-foreground)"
 								strokeWidth="1.5"
 								strokeLinecap="round"
 								opacity="0.5"
@@ -166,7 +168,7 @@ export default function AnalogClock({
 				className="font-geist -tracking-[0.13px] flex items-center gap-x-2.5 mx-auto w-fit"
 			>
 				🇳🇬
-				<span className="inline-block text-foreground-muted">{`${time.getHours()}:${time.getMinutes()}`}</span>
+				<span className="inline-block text-muted-foreground">{`${time.getHours() % 12 || 12}:${String(time.getMinutes()).padStart(2, "0")} ${time.getHours() >= 12 ? "PM" : "AM"}`}</span>
 			</div>
 		</div>
 	);

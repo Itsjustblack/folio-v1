@@ -42,12 +42,13 @@ export default function VinylMusic() {
 			style={{
 				rotate,
 			}}
-			className="size-18.75 relative flex justify-center items-center fixed bottom-4.25 right-7.5 cursor-pointer border-none bg-transparent p-0 z-999"
+			className="size-18.75 flex justify-center items-center fixed bottom-4.25 right-7.5 cursor-pointer border-none bg-transparent p-0 z-999"
 		>
 			<Image
 				src="/vinyl.png"
-				alt=""
+				alt="vinyl record"
 				fill
+				sizes="75px"
 				className="object-cover"
 			/>
 		</motion.button>

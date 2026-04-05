@@ -22,7 +22,7 @@ function Navitem({ name, to }: { name: string; to: string }) {
 		<Link
 			href={to}
 			className={cn(
-				"relative flex py-1.5 px-3 rounded-[5px] text-muted hover:text-foreground tracking-[-0.16px] transition-colors duration-150 ease-out",
+				"relative flex py-1.5 px-3 rounded-[5px] text-muted-foreground hover:text-foreground tracking-[-0.16px] transition-colors duration-150 ease-out",
 				isActive && "text-foreground",
 			)}
 		>

@@ -1,16 +1,20 @@
-"use client";
-
 import { useState, useEffect } from "react";
 
 export function useCurrentTime() {
-	const [time, setTime] = useState(new Date());
+	const [time, setTime] = useState<Date | null>(null);
 
 	useEffect(() => {
-		const interval = setInterval(() => {
+		const id = setInterval(() => {
 			setTime(new Date());
 		}, 1000);
 
-		return () => clearInterval(interval);
+		// Immediate first tick without synchronous setState in effect body
+		// const timeout = setTimeout(() => setTime(new Date()), 0);
+
+		return () => {
+			clearInterval(id);
+			// clearTimeout(timeout);
+		};
 	}, []);
 
 	return time;

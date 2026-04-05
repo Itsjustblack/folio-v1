@@ -17,7 +17,7 @@ export default function Testimonial({
 }: ITestimonial) {
 	return (
 		<div className="space-y-7.5 font-geist">
-			<p className="line-clamp-3 text-foreground-muted text-lg leading-7.5 -tracking-[0.18px]">
+			<p className="line-clamp-3 text-muted-foreground text-lg leading-7.5 -tracking-[0.18px]">
 				“{content}”
 			</p>
 			<div className="flex gap-x-5 items-center">
@@ -26,6 +26,7 @@ export default function Testimonial({
 						src={imageSrc}
 						alt={name}
 						fill
+						sizes="50px"
 						className="object-cover"
 					/>
 				</div>
@@ -33,7 +34,7 @@ export default function Testimonial({
 					<span className="text-lg text-foreground font-semibold -tracking-[0.18px]">
 						{name}
 					</span>
-					<p className="text-foreground-muted text-base -tracking-[0.15px]">
+					<p className="text-muted-foreground text-base -tracking-[0.15px]">
 						{role}
 					</p>
 				</div>
