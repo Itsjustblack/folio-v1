@@ -27,13 +27,13 @@ export default function RootLayout({
 			className={cn("font-sans", geist.variable)}
 		>
 			<body>
-				<main className="min-h-dvh mt-7.5">
+				<main className="min-h-dvh">
 					<TanstackQueryProvider>
 						<ThemeProvider>
 							<NavBar />
 							{children}
 							<Footer />
-							{/* <VinylMusic /> */}
+							<VinylMusic />
 							<DialRoot />
 						</ThemeProvider>
 					</TanstackQueryProvider>

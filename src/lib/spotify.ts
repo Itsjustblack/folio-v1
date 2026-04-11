@@ -103,36 +103,9 @@ export async function getAccessToken() {
 	}
 
 	// Token expired or missing — refresh it
+	// Note: cookies can't be set during rendering, so we return the fresh token
+	// without persisting it. The cookies will be updated on the next route handler call.
 	const data = await refreshAccessToken(refreshToken);
-
-	const cookieOptions = {
-		httpOnly: true,
-		secure: process.env.NODE_ENV === "production",
-		sameSite: "lax" as const,
-		path: "/",
-	};
-
-	cookieStore.set("spotify_access_token", data.access_token, {
-		...cookieOptions,
-		maxAge: data.expires_in,
-	});
-
-	cookieStore.set(
-		"spotify_token_expiry",
-		String(Math.floor(Date.now() / 1000) + data.expires_in),
-		{
-			...cookieOptions,
-			maxAge: 30 * 24 * 60 * 60,
-		},
-	);
-
-	if (data.refresh_token) {
-		cookieStore.set("spotify_refresh_token", data.refresh_token, {
-			...cookieOptions,
-			maxAge: 30 * 24 * 60 * 60,
-		});
-	}
-
 	return data.access_token;
 }
 

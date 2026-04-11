@@ -8,7 +8,7 @@ import {
 	ClusteerLogo,
 	ArrowRightIcon,
 } from "../../components/icons";
-import Button from "../../components/button";
+import { Button } from "../../components/ui/button";
 import Container from "../../components/layout/container";
 
 type Project = {
@@ -81,9 +81,9 @@ function ProjectPreview({
 
 export default function WorksSection() {
 	return (
-		<Container className="mt-12.5">
+		<Container className="mt-12.5 flex flex-col">
 			<h2 className="text-[32px] font-primary text-foreground -tracking-[0.32px] capitalize">
-				my works
+				Works
 			</h2>
 			<div className="group grid grid-cols-2 gap-6.25 my-7.5">
 				{projects.map((project) => (
@@ -93,17 +93,14 @@ export default function WorksSection() {
 					/>
 				))}
 			</div>
-			<Button
-				className="ml-auto"
-				text="View All"
-				icon={
-					<ArrowRightIcon
-						width={15}
-						height={23}
-						className="fill-foreground"
-					/>
-				}
-			/>
+			<Button className="ml-auto">
+				View All
+				<ArrowRightIcon
+					width={15}
+					height={23}
+					className="fill-foreground"
+				/>
+			</Button>
 			<hr className="my-12.5 border-border border-t" />
 		</Container>
 	);

@@ -4,10 +4,10 @@ import WorksSection from "../sections/home/works-section";
 
 export default function Home() {
 	return (
-		<>
+		<div className="mt-7.5">
 			<HeroSection />
 			<WorksSection />
 			<ArticlesSection />
-		</>
+		</div>
 	);
 }

@@ -21,7 +21,7 @@ async function MusicSectionLoader() {
 
 export default function About() {
 	return (
-		<>
+		<div className="mt-7.5">
 			<InfoSection />
 			<ExperienceSection />
 			<BeyondCorporateSection />
@@ -29,6 +29,6 @@ export default function About() {
 			<Suspense fallback={<MusicSection />}>
 				<MusicSectionLoader />
 			</Suspense>
-		</>
+		</div>
 	);
 }

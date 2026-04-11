@@ -1,3 +1,3 @@
 export default function Works() {
-	return <main>Works</main>;
+	return <div className="mt-7.5">Works</div>;
 }
