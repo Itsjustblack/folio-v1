@@ -1,64 +1,123 @@
 "use client";
 
+import { ENTRY_DELAY } from "@/lib/constants";
+import { useDeck } from "@/providers/deck-provider";
+import {
+	AnimatePresence,
+	motion,
+	useMotionValueEvent,
+	useScroll,
+} from "motion/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { AnimatePresence, motion } from "motion/react";
+import { useRef, useState } from "react";
 import { cn } from "../lib/utils";
 import ThemeToggle from "./theme-toggle";
+
+const navbarVariants = {
+	hidden: { opacity: 0, scale: 0.96, filter: "blur(12px)" },
+	visible: {
+		opacity: 1,
+		scale: 1,
+		filter: "blur(0px)",
+		transition: { ease: "easeOut", duration: 0.3, delay: ENTRY_DELAY },
+	},
+} as const;
+
+const TOP_THRESHOLD = 50;
+const DELTA_THRESHOLD = 15;
 
 const navItems = [
 	{ name: "Home", to: "/" },
 	{ name: "About", to: "/about" },
 	{ name: "Works", to: "/works" },
-	{ name: "Writing", to: "/writing" },
-	{ name: "Playground", to: "/playground" },
+	// { name: "Writing", to: "/writing" },
+	// { name: "Playground", to: "/playground" },
 ];
 
 function Navitem({ name, to }: { name: string; to: string }) {
 	const pathname = usePathname();
-	const isActive = pathname === to;
+	const isActive =
+		to === "/"
+			? pathname === to
+			: pathname === to || pathname.startsWith(`${to}/`);
 
 	return (
 		<Link
 			href={to}
 			className={cn(
-				"relative flex py-1.5 px-3 rounded-[5px] text-muted hover:text-foreground tracking-[-0.16px] transition-colors duration-150 ease-out",
-				isActive && "text-foreground",
+				"relative px-3 h-8.25 flex text-sm items-center keyboard",
+				isActive && "active",
 			)}
 		>
-			<AnimatePresence initial={false}>
-				{isActive && (
-					<motion.span
-						layoutId="active-bg"
-						className="absolute inset-0 rounded-[5px] bg-background shadow-[0_2px_4px_0_rgba(0,0,0,0.06)]"
-						transition={{ ease: "easeOut", duration: 0.3 }}
-					/>
-				)}
-			</AnimatePresence>
-			<span className="relative z-10">{name}</span>
+			{name}
 		</Link>
 	);
 }
 
 export default function NavBar() {
+	const [hidden, setHidden] = useState(false);
+	const { scrollY } = useScroll();
+	const { isDeckCompleted } = useDeck();
+
+	const anchorYRef = useRef(0);
+
+	useMotionValueEvent(scrollY, "change", (y) => {
+		if (y <= TOP_THRESHOLD) {
+			setHidden(false);
+			anchorYRef.current = y;
+			return;
+		}
+
+		const delta = y - anchorYRef.current;
+		if (Math.abs(delta) < DELTA_THRESHOLD) return;
+
+		setHidden(delta > 0);
+		anchorYRef.current = y;
+	});
+
 	return (
-		<motion.nav
-			initial={{ opacity: 0, y: -2, filter: "blur(3px)" }}
-			animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-			transition={{ ease: "easeOut", duration: 0.3, delay: 2.4 }}
-			className="w-fit bg-secondary border-2 fixed top-7.5 left-1/2 -translate-x-1/2 z-99 border-border h-13.5 py-2.5 gap-5 px-3.75 mx-auto flex items-center rounded-[10px] shadow-[9px_30px_9px_0_rgba(0,0,0,0.00),6px_19px_8px_0_rgba(0,0,0,0.01),3px_11px_7px_0_rgba(0,0,0,0.02),1px_5px_5px_0_rgba(0,0,0,0.03),0_1px_3px_0_rgba(0,0,0,0.04)]"
-		>
-			{navItems.map(({ name, to }) => (
-				<Navitem
-					key={to}
-					name={name}
-					to={to}
-				/>
-			))}
-
-			<div className="h-full w-[1.5px] shrink-0 bg-border"></div>
-
-			<ThemeToggle />
-		</motion.nav>
+		<AnimatePresence>
+			{!hidden && (
+				<motion.nav
+					initial="hidden"
+					animate={isDeckCompleted ? "visible" : "hidden"}
+					// variants={blurReveal}
+					variants={navbarVariants}
+					exit="hidden"
+					className="fixed top-8 left-1/2 -translate-x-1/2 z-30"
+				>
+					<div
+						// style={{
+						// 	boxShadow: `9px 30px 9px 0 rgba(0, 0, 0, 0.00), 6px 19px 8px 0
+						// rgba(0, 0, 0, 0.01), 3px 11px 7px 0 rgba(0, 0, 0, 0.02), 1px 5px 5px
+						// 0 rgba(0, 0, 0, 0.03), 0 1px 3px 0 rgba(0, 0, 0, 0.04)`,
+						// }}
+						className="perspective-normal px-3.75 h-13.5 flex items-center gap-x-3 md:gap-x-5 border-2 rounded-[10px] border-border shadow-[0_2px_0_0] shadow-border bg-[#F4F4F4] dark:bg-background"
+					>
+						{navItems.map(({ name, to }) => (
+							<Navitem
+								key={to}
+								name={name}
+								to={to}
+							/>
+						))}
+						{/* <div className="relative p-1 size-8.25 shrink-0 keyboard active overflow-hidden">
+							<div className="relative rounded-[5px] size-full overflow-clip">
+								<Image
+									src="/jason.jpg"
+									alt="my picture"
+									fill
+									loading="eager"
+									priority
+									className="object-cover object-[0%_23%] pointer-events-none"
+								/>
+							</div>
+						</div> */}
+						<ThemeToggle />
+					</div>
+				</motion.nav>
+			)}
+		</AnimatePresence>
 	);
 }

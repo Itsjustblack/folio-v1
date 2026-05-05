@@ -19,16 +19,14 @@ export default function Experience({
 }: IExperience) {
 	return (
 		<li className="flex gap-x-5 items-center">
-			<Logo
-				width={50}
-				height={50}
-			/>
+			<Logo className="size-9.75 sm:size-12.5 shrink-0" />
 			<div className="font-geist">
-				<p className="text-lg space-y-1.25 text-foreground -tracking-[0.18px]">
-					{role} <span className="font-semibold">• {company}</span>
+				<p className="text-base sm:text-lg space-y-1.25 text-foreground -tracking-[0.18px]">
+					{role} <span className="text-sm">@</span>{" "}
+					<span className="font-semibold">{company}</span>
 				</p>
-				<p className="text-foreground text-base -tracking-[0.15px]">
-					{location}, <span className="text-muted-foreground">{period}</span>
+				<p className="text-foreground text-sm sm:text-base -tracking-[0.15px]">
+					{location} • <span className="text-muted-foreground">{period}</span>
 				</p>
 			</div>
 		</li>

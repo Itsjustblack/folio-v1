@@ -164,11 +164,11 @@ export default function AnalogClock({
 				</svg>
 			</div>
 			<div
-				style={{ fontSize: SIZE * 0.05 }}
-				className="font-geist -tracking-[0.13px] flex items-center gap-x-2.5 mx-auto w-fit"
+				// style={{ fontSize: SIZE * 0.08 }}
+				className="font-geist -tracking-[0.13px] flex items-center gap-x-2.5 mx-auto w-fit text-xs text-muted-foreground"
 			>
 				🇳🇬
-				<span className="inline-block text-muted-foreground">{`${time.getHours() % 12 || 12}:${String(time.getMinutes()).padStart(2, "0")} ${time.getHours() >= 12 ? "PM" : "AM"}`}</span>
+				<span className="inline-block">{`${time.getHours() % 12 || 12}:${String(time.getMinutes()).padStart(2, "0")} ${time.getHours() >= 12 ? "PM" : "AM"}`}</span>
 			</div>
 		</div>
 	);

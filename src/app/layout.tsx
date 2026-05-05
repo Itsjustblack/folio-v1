@@ -1,12 +1,14 @@
+import ImageModal from "@/components/image-modal-client";
+import { TooltipProvider } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
+import { DeckProvider } from "@/providers/deck-provider";
+import { ModalProvider } from "@/providers/modal-provider";
 import TanstackQueryProvider from "@/providers/tanstack-query-provider";
 import ThemeProvider from "@/providers/theme-provider";
-import { DialRoot } from "dialkit";
+// import { DialRoot } from "dialkit";
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
-import Footer from "../components/layout/footer";
-import NavBar from "../components/navbar";
-import VinylMusic from "../components/vinyl-music";
+import { Suspense } from "react";
 import "./globals.css";
 
 const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
@@ -27,17 +29,22 @@ export default function RootLayout({
 			className={cn("font-sans", geist.variable)}
 		>
 			<body>
-				<main className="min-h-dvh">
-					<TanstackQueryProvider>
-						<ThemeProvider>
-							<NavBar />
-							{children}
-							<Footer />
-							<VinylMusic />
-							<DialRoot />
-						</ThemeProvider>
-					</TanstackQueryProvider>
-				</main>
+				<TanstackQueryProvider>
+					<ThemeProvider>
+						<ModalProvider>
+							<DeckProvider>
+								<TooltipProvider>
+									{children}
+									{/* <VinylMusic /> */}
+									{/* <DialRoot /> */}
+									<Suspense fallback={null}>
+										<ImageModal />
+									</Suspense>
+								</TooltipProvider>
+							</DeckProvider>
+						</ModalProvider>
+					</ThemeProvider>
+				</TanstackQueryProvider>
 			</body>
 		</html>
 	);

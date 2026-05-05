@@ -1,7 +1,12 @@
-import { Button } from "../../components/ui/button";
+"use client";
+
+import { blurReveal } from "@/lib/constants";
+import { motion } from "motion/react";
+import ArticlesList from "../../components/articles-list";
 import { ArrowRightIcon } from "../../components/icons";
 import Container from "../../components/layout/container";
-import ArticlesList from "../../components/articles-list";
+import { Button } from "../../components/ui/button";
+import Link from "next/link";
 
 const articles = [
 	{
@@ -33,14 +38,19 @@ export default function ArticlesSection() {
 			<div className="my-7.5">
 				<ArticlesList articles={articles} />
 			</div>
-			<Button className="ml-auto">
-				View All
-				<ArrowRightIcon
-					width={15}
-					height={23}
-					className="fill-foreground"
-				/>
-			</Button>
+			<Link
+				href="/writing"
+				className="ml-auto"
+			>
+				<Button>
+					View All
+					<ArrowRightIcon
+						width={15}
+						height={23}
+						className="fill-foreground"
+					/>
+				</Button>
+			</Link>
 		</Container>
 	);
 }

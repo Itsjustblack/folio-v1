@@ -6,7 +6,7 @@ interface ArticlePreviewProps {
 
 function ArticlePreview({ date, title, description }: ArticlePreviewProps) {
 	return (
-		<div className="grid grid-cols-subgrid col-span-2 items-start font-geist group-hover:opacity-25 hover:opacity-100! transition-opacity duration-190 cursor-pointer">
+		<div className="grid grid-cols-subgrid col-span-2 items-start font-geist group-hover:opacity-25 hover:opacity-100! transition-opacity duration-300 ease-in-out cursor-pointer">
 			<p className="text-nowrap text-[15px] text-muted-foreground -tracking-[0.15px] col-span-1">
 				{date}
 			</p>

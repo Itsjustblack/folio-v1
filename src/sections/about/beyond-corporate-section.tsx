@@ -4,14 +4,15 @@ import type { IExperience } from "../../components/experience";
 import Experience from "../../components/experience";
 import { GDGLogo, HSLLogo, KoraLogo } from "../../components/icons";
 import Container from "../../components/layout/container";
+import Divider from "../../components/divider";
 
 const experiences: IExperience[] = [
 	{
 		logo: KoraLogo,
-		role: "Winning Team Member",
+		role: "Participant",
 		company: "Kora Hackathon",
 		location: "Lagos, Nigeria",
-		period: "June 2025",
+		period: "November 2025",
 	},
 	{
 		logo: HSLLogo,
@@ -23,16 +24,16 @@ const experiences: IExperience[] = [
 	{
 		logo: GDGLogo,
 		role: "Frontend Track Lead",
-		company: "Google Developers Group (GDG)",
+		company: "Google Developers Group (GDG) CU",
 		location: "Ogun, Nigeria",
-		period: "October 2024 – Present",
+		period: "October 2024 – August 2025",
 	},
 ];
 
 export default function BeyondCorporateSection() {
 	return (
 		<Container className="space-y-7.5">
-			<h2 className="text-[32px] font-normal font-primary text-foreground -tracking-[0.32px]">
+			<h2 className="text-3xl text-[28px] sm:text-[32px] font-normal font-primary text-foreground -tracking-[0.32px]">
 				Beyond Corporate
 			</h2>
 			<ul className="flex flex-col gap-y-6.5">
@@ -43,7 +44,7 @@ export default function BeyondCorporateSection() {
 					/>
 				))}
 			</ul>
-			<hr className="my-12.5 border-border border-t" />
+			<Divider />
 		</Container>
 	);
 }

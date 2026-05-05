@@ -39,7 +39,7 @@ function Track({ src }: { src: string }) {
 	return (
 		<div
 			ref={trackRef}
-			className="relative w-[calc(25vw-30px)] aspect-square rounded-[10px] overflow-hidden shrink-0"
+			className="relative w-[calc(35vw-30px)] lg:w-[calc(25vw-30px)] aspect-square rounded-[10px] overflow-hidden shrink-0"
 		>
 			<MotionImage
 				fill

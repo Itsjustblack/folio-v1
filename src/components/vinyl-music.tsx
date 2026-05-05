@@ -36,13 +36,15 @@ export default function VinylMusic() {
 		<motion.button
 			initial={{ opacity: 0, filter: "blur(3px)", scale: 0.9 }}
 			animate={{ opacity: 1, filter: "blur(0px)", scale: 1 }}
-			transition={{ type: "spring", stiffness: 400, damping: 30, delay: 2.4 }}
-			onAnimationComplete={() => setTimeout(() => setSpinning(true), 100)}
+			whileTap={{
+				scale: 0.96,
+				transition: { type: "spring", stiffness: 700, damping: 15 },
+			}}
 			onClick={handleClick}
 			style={{
 				rotate,
 			}}
-			className="size-18.75 flex justify-center items-center fixed bottom-4.25 right-7.5 cursor-pointer border-none bg-transparent p-0 z-999"
+			className="size-18.75 flex justify-center focus-visible:ring-2 focus-visible:ring-ring/50 rounded-full items-center fixed bottom-4.25 right-7.5 cursor-pointer border-none bg-transparent z-999"
 		>
 			<Image
 				src="/vinyl.png"

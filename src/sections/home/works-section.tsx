@@ -1,17 +1,20 @@
 "use client";
 
+import ProjectList from "@/components/project-list";
 import type { ComponentType, SVGProps } from "react";
 import {
-	BellPayLogo,
-	RemitaLogo,
-	OmnikaidoLogo,
-	ClusteerLogo,
 	ArrowRightIcon,
+	BellPayLogo,
+	ClusteerLogo,
+	OmnikaidoLogo,
+	RemitaLogo,
 } from "../../components/icons";
-import { Button } from "../../components/ui/button";
 import Container from "../../components/layout/container";
+import { Button } from "../../components/ui/button";
+import Link from "next/link";
 
-type Project = {
+export type Project = {
+	slug: string;
 	title: string;
 	description: string;
 	icon: ComponentType<SVGProps<SVGSVGElement>>;
@@ -20,64 +23,38 @@ type Project = {
 
 const projects: Project[] = [
 	{
+		slug: "clusteer",
 		title: "Clusteer",
 		description:
-			"Developed an interactive gift card marketplace with secure payments, improving navigation, trust, and overall experience.",
+			"A P2P crypto-to-fiat exchange for trading USDT to Naira, with multi-wallet support and escrow protection.",
 		icon: ClusteerLogo,
 		backgroundImage: "/bg-clusteer.png",
 	},
 	{
+		slug: "remita",
 		title: "Remita",
 		description:
-			"Developed an interactive gift card marketplace with secure payments, improving navigation, trust, and overall experience.",
+			"Nigeria's flagship payment platform for transfers, bills, and finances across every bank in one place.",
 		icon: RemitaLogo,
-		backgroundImage: "/bg-remita.jpg",
+		backgroundImage: "/remita.jpg",
 	},
 	{
+		slug: "omnikaido",
 		title: "Omnikaido",
 		description:
-			"Developed an interactive gift card marketplace with secure payments, improving navigation, trust, and overall experience.",
+			"A gift card marketplace with hundreds of global brands and a smooth, checkout flow powered by Paystack.",
 		icon: OmnikaidoLogo,
 		backgroundImage: "/bg-omnikaido.png",
 	},
 	{
+		slug: "bellpay",
 		title: "BellPay",
 		description:
-			"Developed an interactive gift card marketplace with secure payments, improving navigation, trust, and overall experience.",
+			"A marketing site for a payment solutions company, built with designers and tuned for speed and traffic growth.",
 		icon: BellPayLogo,
 		backgroundImage: "/bg-bellpay.png",
 	},
 ];
-
-function ProjectPreview({
-	title,
-	description,
-	icon: Icon,
-	backgroundImage,
-}: Project) {
-	return (
-		<div className="font-geist group-hover:opacity-25 hover:opacity-100! transition-opacity duration-190 cursor-pointer">
-			<div
-				className="relative flex items-center justify-center bg-position-[50%_50%] bg-cover h-65 max-w-115.75 rounded-[10px]"
-				style={{ backgroundImage: `url(${backgroundImage})` }}
-			>
-				<Icon
-					width={250}
-					height={70}
-					className="relative z-10"
-				/>
-			</div>
-			<div className="my-6.25">
-				<span className="inline-block text-foreground font-semibold -tracking-[0.2px] text-xl">
-					{title}
-				</span>
-				<p className="mt-1.25 text-muted-foreground -tracking-[-0.15px] text-[15px]">
-					{description}
-				</p>
-			</div>
-		</div>
-	);
-}
 
 export default function WorksSection() {
 	return (
@@ -85,23 +62,23 @@ export default function WorksSection() {
 			<h2 className="text-[32px] font-primary text-foreground -tracking-[0.32px] capitalize">
 				Works
 			</h2>
-			<div className="group grid grid-cols-2 gap-6.25 my-7.5">
-				{projects.map((project) => (
-					<ProjectPreview
-						key={project.title}
-						{...project}
-					/>
-				))}
+			<div className="my-7.5">
+				<ProjectList projects={projects} />
 			</div>
-			<Button className="ml-auto">
-				View All
-				<ArrowRightIcon
-					width={15}
-					height={23}
-					className="fill-foreground"
-				/>
-			</Button>
-			<hr className="my-12.5 border-border border-t" />
+			<Link
+				href="/works"
+				className="ml-auto flex text-muted-foreground hover:text-foreground font-geist text-sm font-medium uppercase"
+			>
+				<Button className="">
+					View All
+					<ArrowRightIcon
+						width={15}
+						height={23}
+						className="fill-foreground"
+					/>
+				</Button>
+			</Link>
+			{/* <Divider /> */}
 		</Container>
 	);
 }
