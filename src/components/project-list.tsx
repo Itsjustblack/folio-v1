@@ -1,3 +1,6 @@
+"use client";
+
+import { useSound } from "@/context/audio-context";
 import Image from "next/image";
 import Link from "next/link";
 import type { ComponentType, SVGProps } from "react";
@@ -17,12 +20,15 @@ function ProjectPreview({
 	icon: Icon,
 	backgroundImage,
 }: ProjectPreviewProps) {
+	const { play } = useSound();
+
 	return (
 		<Link
 			href={`/works/${slug}`}
+			onClick={() => play("tap")}
 			className="font-geist group-hover:opacity-25 hover:opacity-100! transition-opacity duration-300 ease-in-out flex flex-col-reverse md:flex-col"
 		>
-			<div className="relative flex aspect-[1.77] max-h-fit w-full items-center justify-center rounded-[10px] overflow-clip group-hover:shadow-sm">
+			<div className="relative flex aspect-[1.77] w-full items-center justify-center rounded-[10px] overflow-clip group-hover:shadow-sm">
 				<Image
 					src={backgroundImage}
 					alt={title}

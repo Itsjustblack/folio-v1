@@ -39,8 +39,8 @@ const projects: Project[] = [
 		backgroundImage: "/remita.jpg",
 	},
 	{
-		slug: "omnikaido",
-		title: "Omnikaido",
+		slug: "omnikado",
+		title: "Omnikado",
 		description:
 			"A gift card marketplace with hundreds of global brands and a smooth, checkout flow powered by Paystack.",
 		icon: OmnikaidoLogo,

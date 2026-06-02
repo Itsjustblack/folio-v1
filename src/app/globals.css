@@ -287,16 +287,42 @@
 	}
 
 	.keyboard {
-		@apply relative cursor-pointer text-muted-foreground hover:text-foreground rounded-[5px] hover:bg-background 
-           transform-[translateZ(0)_rotateX(0deg)] origin-[50%_100%] 
+		@apply relative cursor-pointer text-muted-foreground hover:text-foreground rounded-[5px] hover:bg-background
+           transform-[translateZ(0)_rotateX(0deg)] origin-[50%_100%]
            transition-[transform,box-shadow] duration-100 ease-out;
 
-		@apply before:content-[''] before:absolute before:inset-0 
-           hover:before:border before:border-foreground before:rounded-[5px] 
+		@apply before:content-[''] before:absolute before:inset-0
+           hover:before:border before:border-foreground before:rounded-[5px]
            before:pointer-events-none before:transition-colors;
 
 		@apply [.active&]:before:border [.active&]:text-foreground [.active&]:bg-background [.active&]:shadow-[0_2px_0_0_var(--color-foreground)];
 
 		@apply active:transform-[translateZ(-4px)_rotateX(0deg)] active:shadow-none hover:shadow-[0_2px_0_0_var(--color-foreground)];
+	}
+
+	/* .lamp {
+		@apply pointer-events-none absolute blur-md;
+		background: radial-gradient(
+			ellipse 70% 100% at 50% 0%,
+			oklab(0.95 0.05 0.1 / 0.5) 0%,
+			oklab(0.92 0.04 0.08 / 0.25) 30%,
+			transparent 75%
+		);
+		clip-path: polygon(38% 0%, 62% 0%, 100% 100%, 0% 100%);
+	} */
+
+	.lamp {
+		@apply pointer-events-none absolute inset-0 blur-xl;
+
+		background: radial-gradient(
+			ellipse 60% 100% at 50% 0%,
+			rgba(255, 230, 180, 0.55) 0%,
+			rgba(255, 220, 150, 0.35) 25%,
+			rgba(255, 200, 120, 0.15) 50%,
+			rgba(255, 180, 100, 0.05) 65%,
+			transparent 80%
+		);
+
+		/* transform: translateY(10px); */
 	}
 }

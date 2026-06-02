@@ -1,0 +1,41 @@
+export const metadata = {
+	title: "Omnikado",
+	date: "September 2023 – December 2023",
+	url: "https://www.omnikado.com",
+};
+
+I built the frontend for Omnikaido, a gift card marketplace that lets users buy digital gift cards from hundreds of global brands and pay with local methods. The product had one job: make the purchase of a card from any brand in the catalogue feel instant and effortless — from discovery through checkout to delivery.
+
+![Omnikaido marketplace](/bg-omnikaido.png)
+
+---
+
+## My role
+
+Omnikaido is a catalogue-first product — the value proposition is breadth and speed. I owned the frontend from scratch, making decisions about how the catalogue was structured, searched, and filtered, and how the checkout experience should flow so that a user could go from landing on the site to receiving a code in the fewest possible steps.
+
+Paystack handled the payment side, but integrating it cleanly inside a custom checkout flow with correct error handling, retry logic, and real-time confirmation feedback took more care than a simple embed. I worked directly with the founders to balance the scope of the initial launch against the architecture needed to support a growing catalogue.
+
+---
+
+## Catalogue and search
+
+The catalogue spans hundreds of brands across categories like gaming, streaming, food, retail, and lifestyle. I built the browse experience around fast client-side filtering and search on top of a paginated server response, so users could narrow by category, region, or price range without waiting on the network. Each brand card shows live availability and denomination options, and the card detail page is optimised for conversion — the denomination selector and add-to-cart are above the fold on every screen size.
+
+---
+
+## Checkout and Paystack integration
+
+The checkout flow is deliberately short: cart review, payment, confirmation. I integrated Paystack's inline checkout with a custom wrapper that handles all the edge cases — failed charges, card decline messages, network timeouts, and the brief window between a successful charge and the backend confirming the order — so users never see a raw error or get stuck on a spinner.
+
+After a successful payment, the gift card codes are delivered on-screen and by email simultaneously. I built the delivery confirmation page as a polling view that updates as soon as the backend marks the order fulfilled, with a graceful fallback to email if the codes take longer than expected to provision.
+
+---
+
+## What shipped
+
+- Full catalogue interface with client-side filtering, search, and category browsing
+- Brand detail pages optimised for conversion with denomination selection
+- Custom Paystack integration covering all edge cases in the payment flow
+- Real-time order confirmation with on-screen code delivery
+- Responsive design across mobile and desktop from the ground up

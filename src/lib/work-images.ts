@@ -3,7 +3,7 @@ export const WORK_IMAGES: Record<string, { src: string; alt: string }> = {
 	"remita/role": { src: "/remita.jpg", alt: "Remita — my role" },
 	"remita/goal": { src: "/remita.jpg", alt: "Remita — end goal" },
 	"clusteer/hero": { src: "/bg-clusteer.png", alt: "Clusteer — hero" },
-	"omnikaido/hero": { src: "/bg-omnikaido.png", alt: "Omnikaido — hero" },
+	"omnikaido/hero": { src: "/bg-omnikaido.png", alt: "Omnikado — hero" },
 	"bellpay/hero": { src: "/bg-bellpay.png", alt: "BellPay — hero" },
 };
 

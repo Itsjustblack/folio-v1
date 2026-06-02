@@ -1,23 +1,34 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { createContext, Suspense, useContext, useLayoutEffect, useState } from "react";
+import {
+	createContext,
+	Suspense,
+	useContext,
+	useLayoutEffect,
+	useState,
+	type Dispatch,
+	type SetStateAction,
+} from "react";
 
-interface DeckContextValue {
+type DeckContextValue = {
 	isDeckCompleted: boolean;
-	setIsDeckCompleted: (value: boolean) => void;
-}
+	setIsDeckCompleted: Dispatch<SetStateAction<boolean>>;
+};
 
 const DeckContext = createContext<DeckContextValue | null>(null);
 
-function DeckInit({ setIsDeckCompleted }: { setIsDeckCompleted: (value: boolean) => void }) {
+function DeckInit({
+	setIsDeckCompleted,
+}: Pick<DeckContextValue, "setIsDeckCompleted">) {
 	const pathname = usePathname();
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	useLayoutEffect(() => { setIsDeckCompleted(pathname !== "/"); }, []);
+	useLayoutEffect(() => {
+		setIsDeckCompleted(pathname !== "/");
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 	return null;
 }
 
-// **SWITCH TO USING USE SESSION STORAGE INSTEAD OF CONTEXT**
 export function DeckProvider({ children }: { children: React.ReactNode }) {
 	const [isDeckCompleted, setIsDeckCompleted] = useState(false);
 	return (

@@ -25,10 +25,10 @@ export default function CustomImage({
 		<div className="flex flex-col items-center gap-y-3.75">
 			<motion.div
 				// layout
-				layoutId={layoutId}
-				onClick={() => openModal({ src, alt, layoutId })}
+				// layoutId={layoutId}
+				// onClick={() => openModal({ src, alt, layoutId })}
 				className={cn(
-					"relative flex aspect-[1.675] w-full items-center justify-center rounded-[10px] border-2 border-white/20 bg-primary-foreground overflow-clip cursor-zoom-in z-50",
+					"relative flex aspect-[1.675] w-full items-center justify-center rounded-[10px] border-[1.5px] border-[#E2E2E2] bg-primary-foreground overflow-clip cursor-zoom-in z-50",
 					className,
 				)}
 			>

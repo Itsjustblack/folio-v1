@@ -1,0 +1,43 @@
+export const metadata = {
+	title: "Remita",
+	date: "January 2024 – May 2024",
+	url: "https://remita.net",
+};
+
+I worked on Remita's consumer-facing web product — Nigeria's central payment infrastructure, used by millions to pay bills, transfer money, and manage finances across every bank in the country. The challenge was modernising an interface that had to serve everyone from a first-time smartphone user to a treasury officer processing bulk payroll, without breaking either group.
+
+![Remita platform](/remita.jpg)
+
+---
+
+## My role
+
+Remita sits at the intersection of government, banks, and end users, which means the product has to be extraordinarily robust — there is no tolerance for ambiguity when someone is paying school fees or a ministry is disbursing salaries. I came in to help rebuild key parts of the frontend, focusing on the bill payment flows, inter-bank transfer experience, and the unified financial dashboard that aggregates a user's accounts across multiple institutions.
+
+The work was collaborative across a large engineering and design organisation, so a significant part of my role was contributing to a shared component library and aligning closely with backend teams on the API contracts that drove real-time balance lookups and transaction status.
+
+---
+
+## Payments and transfers
+
+The core of the product is its payments engine. I rebuilt the bill payment flow to support a dynamic field schema — Remita's biller catalogue is enormous, and each biller can define its own required fields, validation rules, and confirmation steps. Rather than hardcoding flows for each biller, I built a form engine driven by the schema returned by the API, which reduced the time to onboard a new biller to zero from the frontend's perspective.
+
+Inter-bank transfers touched every edge case in Nigerian banking: NIP and NEFT routing, different clearing windows, beneficiary management, and transfer limits that vary by account type and verification tier. I built the transfer flow with explicit state machines for each stage — recipient lookup, confirmation, OTP verification, and receipt — so that every failure mode had a defined recovery path instead of a generic error screen.
+
+---
+
+## Dashboard and account aggregation
+
+Remita can link accounts from different banks under a single login. I worked on the dashboard that surfaces balances, recent activity, and pending items across all linked accounts in one view. The data comes from multiple upstream sources on different refresh cycles, so the UI had to be resilient to partial failures — showing stale data with a clear indicator is far better than blocking the whole page on a single slow bank feed.
+
+Transaction history was paginated server-side and filterable by date, type, and biller, with CSV export for users who needed records for reconciliation. Getting the performance right on this view, where some users have years of transaction history, required careful virtualisation and incremental loading.
+
+---
+
+## What shipped
+
+- Rebuilt bill payment flows powered by a dynamic biller schema engine
+- Inter-bank transfer experience covering NIP and NEFT with full error recovery
+- Multi-account dashboard with partial-failure resilience across bank feeds
+- Filterable, exportable transaction history with server-side pagination
+- Contributions to the shared component library used across Remita's web products

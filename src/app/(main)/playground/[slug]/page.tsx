@@ -65,10 +65,7 @@ export default function PlaygroundItem() {
 				</p>
 				<PreviewDemo />
 			</div>
-			<PrevNextNav
-				// previous={{ slug: "post-slug", title: "Post Title" }}
-				next={{ slug: "cards-demo", title: "Cards Demo" }}
-			/>
+			<PrevNextNav currentSlug="folder-demo" />
 		</Container>
 	);
 }

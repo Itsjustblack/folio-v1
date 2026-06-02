@@ -10,7 +10,7 @@ export default function Home() {
 	return (
 		<div
 			className={cn(
-				"pt-52.25 flex flex-col",
+				"pt-57.5 flex flex-col",
 				!isDeckCompleted && "overflow-hidden h-[calc(100vh-130px)]",
 			)}
 		>

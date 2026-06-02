@@ -1,0 +1,41 @@
+export const metadata = {
+	title: "BellPay",
+	date: "April 2023 – July 2023",
+	url: "https://bellpay.vercel.app/",
+};
+
+I built BellPay's marketing site — the public face of a payment solutions company targeting businesses that need to accept and disburse money at scale. The brief was to create something that could convert visitors into leads while loading fast on African mobile networks, where the majority of their audience arrives.
+
+![BellPay marketing site](/bg-bellpay.png)
+
+---
+
+## My role
+
+Working closely with the design team, I translated a high-fidelity Figma system into a production site, making engineering decisions that kept the design integrity intact without trading it away for performance. BellPay serves businesses, so the site had to communicate reliability and credibility — any visual inconsistency or interaction that felt rough would undercut the product's promise.
+
+The site was built to support the marketing team's ability to update copy and feature sections without engineering involvement, so I structured the content layer to be approachable for non-technical editors while keeping the component boundaries clean.
+
+---
+
+## Performance and mobile-first delivery
+
+Performance was a hard constraint. The target audience frequently browses on mid-range Android devices over 3G or 4G networks, so every asset, font load, and layout shift had a cost. I implemented aggressive image optimisation with responsive sizes, deferred loading for below-the-fold content, and a font loading strategy that eliminated layout shift without sacrificing the typographic identity the designers had built.
+
+Lighthouse scores were treated as a functional requirement, not a vanity metric — the business's credibility was tied to the site being fast and stable, and we held green scores throughout the launch period.
+
+---
+
+## Animations and interactions
+
+The design called for scroll-triggered animations and some ambitious interactive sections that showcased the product's core flows. I built these with a motion library that respected `prefers-reduced-motion` out of the box, so the interactive experience degraded gracefully for users who had turned off animations. Getting the animations to feel considered rather than distracting — reinforcing the content hierarchy rather than competing with it — was the main calibration work.
+
+---
+
+## What shipped
+
+- Full marketing site built to spec from the design team's Figma system
+- Optimised asset delivery tuned for mobile networks and mid-range devices
+- Scroll-triggered animation system respecting `prefers-reduced-motion`
+- Content structure accessible to non-technical editors for ongoing updates
+- Consistent Lighthouse performance scores maintained through launch

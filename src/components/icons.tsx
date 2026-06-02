@@ -286,7 +286,7 @@ export function OmnikaidoLogo(props: IconProps) {
 			<div className="relative size-11.5">
 				<Image
 					src="/omnikaido-logo.png"
-					alt="Omnikaido Logo"
+					alt="Omnikado Logo"
 					fill
 					className="object-cover"
 				/>

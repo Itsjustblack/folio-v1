@@ -1,46 +1,46 @@
-import Link from "next/link";
+import fs from "fs";
+import path from "path";
+import NavItem from "./content-nav-item";
 
-export interface PrevNextNavProps {
-	previous?: {
-		slug: string;
-		title: string;
-	};
-	next?: {
-		slug: string;
-		title: string;
-	};
+async function getProjectSlugs(): Promise<string[]> {
+	const dir = path.join(process.cwd(), "src/content/projects");
+	return fs
+		.readdirSync(dir)
+		.filter((f) => f.endsWith(".mdx"))
+		.map((f) => f.replace(".mdx", ""));
 }
 
-export default function ContentNav({ previous, next }: PrevNextNavProps) {
+async function resolveLink(slug: string | null) {
+	if (!slug) return null;
+	const { metadata } = await import(`@/content/projects/${slug}.mdx`);
+	return { slug, title: metadata.title as string };
+}
+
+export default async function ContentNav({
+	currentSlug,
+}: {
+	currentSlug: string;
+}) {
+	"use cache";
+	const slugs = await getProjectSlugs();
+	const idx = slugs.indexOf(currentSlug);
+	const prevSlug = idx > 0 ? slugs[idx - 1] : null;
+	const nextSlug = idx !== -1 && idx < slugs.length - 1 ? slugs[idx + 1] : null;
+
+	const [previous, next] = await Promise.all([
+		resolveLink(prevSlug),
+		resolveLink(nextSlug),
+	]);
+
 	return (
 		<div className="flex items-start justify-between gap-8 border-t border-black/10 pt-12.5 my-12.5 font-normal">
 			{previous ? (
-				<Link
-					href={previous.slug}
-					className="group flex flex-col w-fit"
-				>
-					<span className="text-[15px] tracking-[-0.16px] text-black/50 group-hover:text-black/80 transition-colors duration-200 ease-out">
-						Previous
-					</span>
-					<span className="text-lg tracking-[-0.18px] text-black/80 group-hover:text-black transition-colors duration-200 ease-out">
-						{previous.title}
-					</span>
-				</Link>
+				<NavItem label="Previous" link={previous} align="left" />
 			) : (
 				<div className="flex-1" />
 			)}
 			{next ? (
-				<Link
-					href={next.slug}
-					className="group flex flex-col w-fit items-end text-right"
-				>
-					<span className="text-[15px] tracking-[-0.16px] text-black/50 group-hover:text-black/80 transition-colors duration-200 ease-out">
-						Next
-					</span>
-					<span className="text-lg tracking-[-0.18px] text-black/80 group-hover:text-black transition-colors duration-200 ease-out">
-						{next.title}
-					</span>
-				</Link>
+				<NavItem label="Next" link={next} align="right" />
 			) : (
 				<div className="flex-1" />
 			)}

@@ -13,6 +13,7 @@ import { usePathname } from "next/navigation";
 import { useRef, useState } from "react";
 import { cn } from "../lib/utils";
 import ThemeToggle from "./theme-toggle";
+import { useSound } from "@/context/audio-context";
 
 const navbarVariants = {
 	hidden: { opacity: 0, scale: 0.96, filter: "blur(12px)" },
@@ -37,6 +38,7 @@ const navItems = [
 
 function Navitem({ name, to }: { name: string; to: string }) {
 	const pathname = usePathname();
+	const { play } = useSound();
 	const isActive =
 		to === "/"
 			? pathname === to
@@ -49,6 +51,7 @@ function Navitem({ name, to }: { name: string; to: string }) {
 				"relative px-3 h-8.25 flex text-sm items-center keyboard",
 				isActive && "active",
 			)}
+			onClick={() => play("tap")}
 		>
 			{name}
 		</Link>
@@ -114,7 +117,7 @@ export default function NavBar() {
 								/>
 							</div>
 						</div> */}
-						<ThemeToggle />
+						{/* <ThemeToggle /> */}
 					</div>
 				</motion.nav>
 			)}

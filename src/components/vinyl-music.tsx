@@ -7,12 +7,18 @@ import {
 	type AnimationPlaybackControls,
 } from "motion/react";
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
+import {
+	Tooltip,
+	TooltipContent,
+	TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { useSound } from "@/context/audio-context";
 
 export default function VinylMusic() {
-	const [spinning, setSpinning] = useState(false);
+	const { toggle, play, isPlaying } = useSound();
+	const spinning = isPlaying("vinyl");
 	const animationRef = useRef<AnimationPlaybackControls | null>(null);
-
 	const rotate = useMotionValue(0);
 
 	useEffect(() => {
@@ -30,29 +36,39 @@ export default function VinylMusic() {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [spinning]);
 
-	const handleClick = () => setSpinning(!spinning);
-
 	return (
-		<motion.button
-			initial={{ opacity: 0, filter: "blur(3px)", scale: 0.9 }}
-			animate={{ opacity: 1, filter: "blur(0px)", scale: 1 }}
-			whileTap={{
-				scale: 0.96,
-				transition: { type: "spring", stiffness: 700, damping: 15 },
-			}}
-			onClick={handleClick}
-			style={{
-				rotate,
-			}}
-			className="size-18.75 flex justify-center focus-visible:ring-2 focus-visible:ring-ring/50 rounded-full items-center fixed bottom-4.25 right-7.5 cursor-pointer border-none bg-transparent z-999"
-		>
-			<Image
-				src="/vinyl.png"
-				alt="vinyl record"
-				fill
-				sizes="75px"
-				className="object-cover"
-			/>
-		</motion.button>
+		<Tooltip>
+			<TooltipTrigger asChild>
+				<div
+					onClick={() => play("tap")}
+					className="fixed bottom-4.25 right-7.5 z-999 cursor-pointer"
+				>
+					<motion.button
+						initial={{ opacity: 0, filter: "blur(3px)", scale: 0.9 }}
+						animate={{ opacity: 1, filter: "blur(0px)", scale: 1 }}
+						whileTap={{
+							scale: 0.96,
+							transition: { type: "spring", stiffness: 700, damping: 15 },
+						}}
+						onClick={() => toggle("vinyl")}
+						style={{
+							rotate,
+						}}
+						className="size-18.75 flex justify-center focus-visible:ring-2 focus-visible:ring-ring/50 rounded-full items-center border-none bg-transparent"
+					>
+						<Image
+							src="/vinyl.png"
+							alt="vinyl record"
+							fill
+							sizes="75px"
+							className="object-cover"
+						/>
+					</motion.button>
+				</div>
+			</TooltipTrigger>
+			<TooltipContent>
+				<p>{isPlaying("vinyl") ? "Pause" : "Play"} music</p>
+			</TooltipContent>
+		</Tooltip>
 	);
 }

@@ -1,0 +1,51 @@
+export const metadata = {
+	title: "Clusteer",
+	date: "June 2025 – September 2025",
+	url: "https://clusteer.com",
+};
+
+I led the frontend architecture for Clusteer, a peer-to-peer exchange that converts stablecoins like USDT and USDC directly into Nigerian Naira. The product lives or dies on two things — speed and trust — so every part of the interface had to make traders feel like the number they see is the number they get.
+
+![Clusteer website](/clusteer/clusteer_website_4.png)
+
+---
+
+## My role
+
+I joined when the team needed someone to own the frontend end-to-end, from the marketing site down to the trading dashboard. The brief was deceptively simple: ship a product that feels instant and trustworthy in a category where users won't tolerate either slowness or ambiguity. That meant rebuilding the foundation in Next.js and TypeScript, and making decisions about state, data flow, and real-time updates that would hold up as the platform scaled past its first ninety thousand users.
+
+I worked closely with the design team to translate a clean, mobile-first system into production, while keeping the frontend lean enough that rate updates, balance changes, and order transitions never felt stale. Most of the engineering effort was invisible — the goal was for traders to stop noticing the interface and just move money.
+
+![Clusteer landing page](/clusteer/clusteer_website_1.png)
+
+---
+
+## Wallets and the trading dashboard
+
+Clusteer supports five blockchains — Solana, TRON, Ethereum, and BSC — with stablecoins on each. I built a wallet abstraction so the UI treats every chain identically: a deposit on TRON renders the same way as one on Solana, even though the underlying confirmation models are different. Real-time synchronization was the harder problem. Balances had to reflect on-chain state the moment a transfer confirmed, without polling every wallet on every render, so I leaned on subscription channels and selective revalidation to keep the dashboard in sync with the backend's view of each address.
+
+The order management table is where traders spend most of their time, so it had to be dense without being noisy. I built it on TanStack Table with server-side pagination for the volume Clusteer handles, and client-side filtering and sorting so traders can slice their history without round-tripping to the server. Orders move through several states — pending, matched, settling, completed — and each transition is driven by socket updates with optimistic UI underneath, so the table never feels stuck waiting.
+
+![Clusteer dashboard](/clusteer/clusteer_dashboard_1.png)
+
+![Order management view](/clusteer/clusteer_dashboard_8.png)
+
+---
+
+## Notifications and compliance
+
+Trading is time-sensitive, so users had to hear about transactions instantly — even when the tab was closed. I wired up Firebase Cloud Messaging with a custom service worker that handles background delivery across browsers and mobile devices, and deep-links the user straight back to the relevant order when they tap a notification. Less urgent events route through a quieter in-app channel, so the push pipeline stays focused on things people actually need to act on.
+
+Compliance was non-negotiable. I built a modular KYC flow using React Hook Form and Zod, with dynamic routing that adapts to what the user has already completed and retry logic that doesn't lock anyone out when a verifier is momentarily down. BVN and NIN checks run against the relevant providers, and the same composable steps are reused on the admin side when a manual review is needed.
+
+![KYC and verification flow](/clusteer/clusteer_dashboard_11.png)
+
+---
+
+## What shipped
+
+- A Next.js frontend serving the marketing site, dashboard, and admin tools
+- Real-time wallet synchronization across five chains
+- A transaction and order dashboard built on TanStack Table with live status tracking
+- Push notifications for transactions and security events via FCM and a custom service worker
+- A modular KYC system handling BVN and NIN verification end-to-end

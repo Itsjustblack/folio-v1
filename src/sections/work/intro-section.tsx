@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function IntroSection() {
 	return (
-		<Container className="grid items-start grid-cols-2 gap-16">
+		<Container className="grid items-start lg:grid-cols-2 gap-16">
 			<div>
 				<h1 className="font-primary text-foreground text-5xl -tracking-[0.48px]">
 					Works
@@ -39,14 +39,15 @@ export default function IntroSection() {
 						className="object-cover"
 					/>
 				</div>
-				<div className="absolute w-46.75 h-full right-0 -bottom-5">
+				<div className="absolute w-46.75 h-full -right-6 z-1">
+					{/* <div className="lamp w-full z-6"></div> */}
 					<Image
 						fill
-						src="/floor-lamp.png"
+						src="/lamp-2.png"
 						alt="a floor lamp"
 						priority
 						sizes="400px"
-						className="relative object-cover z-3 object-top"
+						className="relative object-cover object-top"
 					/>
 				</div>
 				<Image
@@ -56,7 +57,7 @@ export default function IntroSection() {
 					alt="a wooden table"
 					priority
 					sizes="400px"
-					className="relative object-cover z-2 object-top w-full"
+					className="relative object-cover z-2 object-top"
 				/>
 			</div>
 		</Container>
