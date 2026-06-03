@@ -1,5 +1,3 @@
-"use client";
-
 import Container from "../../components/layout/container";
 import type { ITestimonial } from "../../components/testimonial";
 import Testimonial from "../../components/testimonial";

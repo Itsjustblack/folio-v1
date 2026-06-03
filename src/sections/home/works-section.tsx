@@ -65,7 +65,7 @@ export default function WorksSection() {
 			<div className="my-7.5">
 				<ProjectList projects={projects} />
 			</div>
-			<Link
+			{/* <Link
 				href="/works"
 				className="ml-auto flex text-muted-foreground hover:text-foreground font-geist text-sm font-medium uppercase"
 			>
@@ -77,7 +77,7 @@ export default function WorksSection() {
 						className="fill-foreground"
 					/>
 				</Button>
-			</Link>
+			</Link> */}
 			{/* <Divider /> */}
 		</Container>
 	);

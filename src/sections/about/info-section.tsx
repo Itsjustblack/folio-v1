@@ -23,7 +23,7 @@ export default function InfoSection() {
 					understand yet — that&apos;s usually where the good stuff lives.
 				</p>
 			</div>
-			<div className="relative flex flex-col items-center justify-center">
+			<div className="relative flex flex-col items-center justify-center mt-12.5 lg:mt-0">
 				<AnalogClock
 					size={150}
 					className="absolute z-1 inset-0 -top-25 mx-auto"
@@ -31,7 +31,7 @@ export default function InfoSection() {
 				<div className="relative w-100 h-150">
 					<div className="w-full h-full relative z-5">
 						<div className="absolute grid grid-cols-2 items-end -top-24 w-full h-fit">
-							<div className="relative -left-2 w-60.5 z-2 aspect-square">
+							<div className="relative -left-9.25 w-60.5 z-2 aspect-square">
 								<Image
 									src="/flowers.png"
 									alt="a shelf"

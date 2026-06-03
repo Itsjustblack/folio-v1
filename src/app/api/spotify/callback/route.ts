@@ -1,4 +1,5 @@
 import { exchangeCodeForTokens } from "@/lib/spotify";
+import { revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
 import { NextResponse, type NextRequest } from "next/server";
 
@@ -57,6 +58,8 @@ export async function GET(request: NextRequest) {
 				maxAge: 30 * 24 * 60 * 60,
 			},
 		);
+
+		revalidateTag("spotify-tracks", "max");
 
 		return NextResponse.redirect(origin);
 	} catch {

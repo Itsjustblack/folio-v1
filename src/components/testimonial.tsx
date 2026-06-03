@@ -16,7 +16,7 @@ export default function Testimonial({
 	content,
 }: ITestimonial) {
 	return (
-		<div className="space-y-7.5 font-geist">
+		<div className="space-y-5.5 font-geist">
 			<p className="line-clamp-3 text-muted-foreground text-base not-[]:md:text-lg leading-7.5 -tracking-[0.18px]">
 				“{content}”
 			</p>
