@@ -14,7 +14,7 @@ import PolaroidDeck from "../../components/polaroid-deck";
 const socialLinks = [
 	{
 		text: "twitter",
-		href: "#",
+		href: "https://x.com/jace_oa",
 		icon: (
 			<TwitterIcon
 				width={20}
@@ -24,7 +24,7 @@ const socialLinks = [
 	},
 	{
 		text: "linkedin",
-		href: "#",
+		href: "https://www.linkedin.com/in/jason-aghedo/",
 		icon: (
 			<LinkedinIcon
 				width={20}
@@ -34,7 +34,7 @@ const socialLinks = [
 	},
 	{
 		text: "github",
-		href: "#",
+		href: "https://github.com/Itsjustblack",
 		icon: (
 			<GithubIcon
 				width={20}
@@ -44,7 +44,7 @@ const socialLinks = [
 	},
 	{
 		text: "instagram",
-		href: "#",
+		href: "https://www.instagram.com/jace.ao",
 		icon: (
 			<InstagramIcon
 				width={20}
@@ -54,7 +54,7 @@ const socialLinks = [
 	},
 	{
 		text: "calendly",
-		href: "#",
+		href: "https://calendly.com/jason-aghedo/intro-call-with-jason-aghedo",
 		icon: (
 			<CalendlyIcon
 				width={20}

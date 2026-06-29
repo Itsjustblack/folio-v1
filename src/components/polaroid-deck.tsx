@@ -10,6 +10,7 @@ import {
 import { useDeck } from "@/providers/deck-provider";
 import { motion, type Transition } from "motion/react";
 import Polaroid from "./polaroid";
+import { cn } from "@/lib/utils";
 
 const entrySpring: Transition = {
 	type: "spring",
@@ -50,7 +51,10 @@ export default function PolaroidDeck() {
 
 	return (
 		<motion.div
-			className="relative flex justify-center pt-12.5 mx-auto overflow-x-clip"
+			className={cn(
+				"relative flex justify-center pt-12.5 mx-auto overflow-x-clip",
+				!isDeckCompleted && "pointer-events-none",
+			)}
 			variants={containerVariants}
 			initial="hidden"
 			animate="rest"
